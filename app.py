@@ -300,18 +300,11 @@ def update_new_users(start_date, end_date, spinoff, user_count_init, user_aqu_co
 def update_users_count(decay_first_day, decay_first_week, decay_first_month, initial_user_count, new_users_data):
     # Getting the new users
     new_users = json.loads(new_users_data[0])
-    # if new_users is None:
-    #     print( " ***** /n/n/n/n/n/n/n/n {}  /n/n/n/n/n/n/n/n   ***** ".format(new_users) )
-    #     raise Exception("Sorry, no need to updte.")
-
-    # print(" ***** /n/n/n/n/n/n/n/n {}   /n/n/n/n/n/n/n/n  {} ***** ".format(new_users, len(new_users)))
-
 
     # Users after first day of decay (We use the proportion inputed by user)
     users_day_two = np.roll(new_users,1)*decay_first_day
     users_day_two[0] = 0
 
-    # print(" ***** /n/n/n/n/n/n/n/n {}   /n/n/n/n/n/n/n/n  {} ***** ".format(users_day_two, len(users_day_two)))
 
     # Parameters of the exponential decay deduced from the decay proportions on the 
     # first week and month:
@@ -404,15 +397,11 @@ def user_count_heatmap(users_per_day_data, start_date, end_date):
 
     users_per_day = json.loads(users_per_day_data[0])
 
-    # print(" ***** /n /n /n /n /n /n /n /n {}   /n/n/n/n/n/n/n/n  {} ***** ".format(users_per_day, len(users_per_day)))
-
 
     df_users_per_day = pd.DataFrame({
         'date': pd.date_range(start_date, end_date),
         'val': users_per_day
     })
-
-    print(" ***** /n /n /n /n /n /n /n /n {}   /n/n/n/n/n/n/n/n  {} ***** ".format(df_users_per_day, len(df_users_per_day)))
 
 
     fig = calplot(
